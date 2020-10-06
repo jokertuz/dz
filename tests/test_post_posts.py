@@ -2,8 +2,7 @@ import allure
 import pytest
 from requests import codes
 
-from config import POST_FOR_TEST_2
-from framework.check import status_code_check, check_posts_the_same, check_post_post_contains_id_response
+from framework.check import (check_posts_the_same, status_code_check)
 from framework.jsonplaceholder_client import Client
 
 
@@ -37,14 +36,3 @@ class TestPostPosts:
         response = client.post_posts_by_body(body_json)
         response_new_post = client.get_posts_by_id(response.json()['id'])
         check_posts_the_same(response_new_post, body_json)
-
-    @allure.title('Positive. Get posts by params combo')
-    @pytest.mark.parametrize('params', POST_FOR_TEST_2)
-    def test_get_posts_by_params_combo(self, params):
-        expected_post = {'userId': 1, 'id': 1,
-                         'title': 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
-                         'body': 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum'
-                                 '\nreprehenderit molestiae ut ut quas totam'
-                                 '\nnostrum rerum est autem sunt rem eveniet architecto'}
-        response = Client().get_posts_by_params(params)
-        check_post_post_contains_id_response(response, expected_post)

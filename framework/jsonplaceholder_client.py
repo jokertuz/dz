@@ -36,7 +36,7 @@ class Client:
     @allure.step
     def get_posts_by_params(self, params: dict):
         params = [f'{name}={value}' for name, value in params.items()]
-        query = str.join("&", params).replace(' ', '%20').replace('\n', '%0A')
+        query = str.join('&', params).replace(' ', '%20').replace('\n', '%0A')
         return self._get(path=f'/posts?{query}')
 
     @allure.step
