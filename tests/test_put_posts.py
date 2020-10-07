@@ -18,7 +18,7 @@ class TestPutPosts:
 
     @allure.title('Positive. Put posts by id')
     @pytest.mark.parametrize('id', [1, 50, 100])
-    def test_put_posts_by_id(self, id, body_json):
+    def test_put_posts_by_id_body(self, id, body_json):
         response = Client().put_posts_by_id(id, body_json)
         check_put_post_contains_id_response(response, id)
 

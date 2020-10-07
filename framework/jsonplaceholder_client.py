@@ -52,7 +52,7 @@ class Client:
         return self._put(path=f'/posts/{posts_id}', data=data)
 
     @allure.step
-    def patch(self, posts_id, data=None):
+    def patch_posts_by_id(self, posts_id, data=None):
         return self._patch(path=f'/posts/{posts_id}', data=data)
 
     @allure.step

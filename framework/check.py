@@ -56,7 +56,7 @@ def check_post_posts_to_the_body(response, expected_code):
 def check_posts_the_same(response, expected_post, expected_code=codes.ok):
     status_code_check(response, expected_code)
     actual_post = response.json()
-    assert_that(actual_post['userId'], equal_to(expected_post['userId']),
+    assert_that(actual_post(['userId']), equal_to(expected_post['userId']),
                 f'Expected userId: {expected_post["userId"]}. Actual userId: {actual_post["userId"]}.'
                 f' Url: {response.url}')
     assert_that(actual_post['title'], equal_to(expected_post['title']),
@@ -72,3 +72,17 @@ def check_post_post_contains_id_response(response, expected_post, expected_code=
     status_code_check(response, expected_code)
     assert_that(expected_post in response.json(),
                 f'Expected: response contains {expected_post}. Actual: {response.json()}. Url: {response.url}')
+
+
+@allure.step
+def check_patch_post_body_in_response(response, expected_post):
+    actual_post = response.json()
+    assert_that(actual_post['userId'], equal_to(str(expected_post['userId'])),
+                f'Expected userId: {expected_post["userId"]}. Actual userId: {actual_post["userId"]}.'
+                f' Url: {response.url}')
+    assert_that(actual_post['title'], equal_to(expected_post['title']),
+                f'Expected title: {expected_post["title"]}. Actual title: {actual_post["title"]}.'
+                f' Url: {response.url}')
+    assert_that(actual_post['body'], equal_to(expected_post['body']),
+                f'Expected body: {expected_post["body"]}. Actual body: {actual_post["body"]}.'
+                f' Url: {response.url}')

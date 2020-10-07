@@ -2,7 +2,7 @@ import allure
 import pytest
 from requests import codes
 
-from framework.check import (check_posts_the_same, status_code_check)
+from framework.check import check_posts_the_same, status_code_check
 from framework.jsonplaceholder_client import Client
 
 
@@ -31,7 +31,7 @@ class TestPostPosts:
         status_code_check(response, codes.bad_request)
 
     @allure.title('Positive. Post created')
-    def test_post_post(self, body_json):
+    def test_post_posts_and_get(self, body_json):
         client = Client()
         response = client.post_posts_by_body(body_json)
         response_new_post = client.get_posts_by_id(response.json()['id'])
